@@ -1,0 +1,20 @@
+## Title: Ern's Suicide Kings
+## Version: 5.4f
+## Author: Ern / Selvaggio (US - Azgalor(H))
+## Interface: 50400
+## SavedVariables: ErnSKLootHistory
+## SavedVariablesPerCharacter: ErnSK_MapPos, ErnSK_Lists, ErnSK_Alts
+
+Ern_SKTab_Main.xml
+Ern_SKTab_Main.lua
+Ern_SKTab_Options.xml
+Ern_SKTab_Options.lua
+Ern_SKTab_Loot.xml
+Ern_SKTab_Loot.lua
+Ern_SKTab_Options_AddPlayers.xml
+Ern_SKTab_Options_AddPlayers.lua
+Ern_SKTab_Options_AltJoiner.xml
+Ern_SKTab_Options_AltJoiner.lua
+Ern_SK_Main.xml
+Ern_SK_Main.lua
+
