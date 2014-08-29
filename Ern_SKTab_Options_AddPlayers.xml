@@ -1,0 +1,417 @@
+<!--
+Ern's Suicide Kings
+<Ern_SKTab_Options_AddPlayers.xml>
+Original Creation Date:	7/18/2012
+Updated Date:			2/16/2014
+Contact:  Ern.Warcraft@gmail.com
+
+Refer to LICENSE.txt for the Apache License, Version 2.0.
+
+Copyright 2012-2014 Aaron Sayles.  All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Ern_SKTab_Options_AddPlayers.lua" />
+	<Button name="scrOptionsTab_AddPlayers_GuildRank_Template" virtual="true" parent="scrOptionsTab_AddPlayer_GuildRankChild" />
+	<Frame name="frmOptions_SKTab_AddPlayer" hidden="true" parent="" toplevel="true" movable="true" frameStrata="DIALOG" enableMouse="true">
+		<Size>
+			<AbsDimension x="375" y="507" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="" relativePoint="CENTER" />
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="txtOptionsTab_AddPlayer_Art" file="Interface\FriendsFrame\FriendsFrameScrollIcon">
+					<Size>
+						<AbsDimension x="60" y="60" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="frmOptions_SKTab_AddPlayer">
+							<Offset x="5" y="-2" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer>
+				<Texture name="txtOptionsTab_AddPlayer_TopRight" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-AUCTION-TOPRIGHT">
+					<Size>
+						<AbsDimension x="182" y="248" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="frmOptions_SKTab_AddPlayer" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AddPlayer_TopLeft" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-BID-TOPLEFT">
+					<Size>
+						<AbsDimension x="222" y="248" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="frmOptions_SKTab_AddPlayer" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AddPlayer_BottomLeft" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-BID-BOTLEFT">
+					<Size>
+						<AbsDimension x="258" y="273" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="frmOptions_SKTab_AddPlayer" relativePoint="BOTTOMLEFT">
+							<Offset x="-2" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AddPlayer_Close" file="Interface\AUCTIONFRAME\AuctionHouseDressUpFrame-Corner">
+					<Size>
+						<AbsDimension x="28" y="28" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="frmOptions_SKTab_AddPlayer" relativePoint="TOPRIGHT">
+							<Offset x="-2" y="-13" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AddPlayer_BottomRight" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-BID-BOTRIGHT">
+					<Size>
+						<AbsDimension x="182" y="265" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="frmOptions_SKTab_AddPlayer" relativePoint="BOTTOMRIGHT">
+							<Offset y="3" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AddPlayer_HDivide2" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="470" y="25" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="15" y="-84" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="txtOptionsTab_AddPlayer_BottomCover" file="Interface\AUCTIONFRAME\UI-AuctionFrame-FilterBg">
+					<Size>
+						<AbsDimension x="465" y="45" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="13" y="-396" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntOptionsTab_AddPlayer_Title" inherits="GameFontNormal" font="Fonts\MORPHEUS.TTF" text="Add Players" outline="THICK">
+					<Size>
+						<AbsDimension x="318" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="36" y="-15" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="0.753" g="0" b="0" />
+				</FontString>
+				<FontString name="fntOptionsTab_AddPlayer_ListName" inherits="GameFontNormal" font="Fonts\MORPHEUS.TTF" text="&lt;List Name&gt;" outline="THICK">
+					<Size>
+						<AbsDimension x="356" y="31" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="16" y="-39" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+				</FontString>
+				<Texture name="txtOptionsTab_AddPlayer_VDivide1" file="Interface\DialogFrame\DialogFrame-Right">
+					<Size>
+						<AbsDimension x="16" y="291" />
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="frmOptions_SKTab_AddPlayer" relativePoint="CENTER">
+							<Offset x="3" y="-23" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AddPlayer_HDivide1" file="Interface\DialogFrame\DialogFrame-Top">
+					<Size>
+						<AbsDimension x="355" y="10" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="16" y="-124" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntOptionsTab_AddPlayer_GuildHead" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Guild" outline="NORMAL">
+					<Size>
+						<AbsDimension x="174" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="193" y="-135" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<FontString name="fntOptionsTab_AddPlayer_RaidHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Raid / Party" outline="NORMAL">
+					<Size>
+						<AbsDimension x="169" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="16" y="-135" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<Texture name="txtOptionsTab_AddPlayer_HDivide4" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="233" y="25" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="193" y="-250" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AddPlayer_HDivide3" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="233" y="25" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="193" y="-152" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AddPlayer_HDivide2" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="227" y="25" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="16" y="-152" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntOptionsTab_AddPlayer_ManualHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Manual" outline="NORMAL">
+					<Size>
+						<AbsDimension x="355" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="16" y="-69" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="btnOptionsTab_AddPlayer_Close" text="">
+				<Size>
+					<AbsDimension x="27" y="26" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="txtOptionsTab_AddPlayer_Close" relativePoint="TOPRIGHT">
+						<Offset x="6" y="3" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnOptionsTab_AddPlayer_Close_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+				<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>
+			<Button name="btnOptionsTab_AddPlayer_OK" inherits="UIPanelButtonTemplate" text="OK">
+				<Size>
+					<AbsDimension x="50" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="260" y="-400" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnOptionsTab_AddPlayer_OK_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnOptionsTab_AddPlayer_Cancel" inherits="UIPanelButtonTemplate" text="Cancel">
+				<Size>
+					<AbsDimension x="50" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="317" y="-400" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnOptionsTab_AddPlayer_Cancel_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<ScrollFrame name="scrOptionsTab_AddPlayer_GuildRank" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="140" y="75" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="199" y="-171" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrOptionsTab_AddPlayer_GuildRankChild">
+						<Size>
+							<AbsDimension x="130" y="55" />
+						</Size>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<ScrollFrame name="scrOptionsTab_AddPlayer_GuildMember" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="140" y="125" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="199" y="-265" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrOptionsTab_AddPlayer_GuildMemberChild">
+						<Size>
+							<AbsDimension x="135" y="105" />
+						</Size>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<ScrollFrame name="scrOptionsTab_AddPlayer_RaidMember" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="150" y="219" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="15" y="-171" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrOptionsTab_AddPlayer_RaidMemberChild">
+						<Size>
+							<AbsDimension x="150" y="219" />
+						</Size>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<EditBox name="inpOptionsTab_AddPlayer_PlayerName" inherits="InputBoxTemplate">
+				<Size>
+					<AbsDimension x="100" y="32" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="26" y="-93" />
+					</Anchor>
+				</Anchors>
+				<FontString inherits="ChatFontNormal">
+					<Color r="1" g="0.82" b="0" />
+				</FontString>
+			</EditBox>
+			<EditBox name="inpOptionsTab_AddPlayer_PlayerServer" inherits="InputBoxTemplate">
+				<Size>
+					<AbsDimension x="80" y="32" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="141" y="-93" />
+					</Anchor>
+				</Anchors>
+				<FontString inherits="ChatFontNormal">
+					<Color r="1" g="0.82" b="0" />
+				</FontString>
+			</EditBox>
+			<Button name="selOptionsTab_AddPlayer_PlayerClass" inherits="UIDropDownMenuTemplate" text="Button1">
+				<Size>
+					<AbsDimension x="70" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="214" y="-95" />
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				tinsert(UISpecialFrames, self:GetName())
+				self:RegisterForDrag("LeftButton")
+				ClassDropDown_DropDownOnLoad(self)
+
+				txtOptionsTab_AddPlayer_HDivide1:SetDrawLayer("OVERLAY", 0)
+				txtOptionsTab_AddPlayer_VDivide1:SetDrawLayer("OVERLAY", 1)
+				txtOptionsTab_AddPlayer_HDivide2:SetDrawLayer("OVERLAY", 2)
+				txtOptionsTab_AddPlayer_HDivide3:SetDrawLayer("OVERLAY", 2)
+				txtOptionsTab_AddPlayer_HDivide4:SetDrawLayer("OVERLAY", 2)
+				txtOptionsTab_AddPlayer_BottomCover:SetDrawLayer("OVERLAY", 2)
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing()
+			</OnDragStop>
+			<OnShow>
+				PlaySound("igCharacterInfoOpen")
+				addPlayerShow()
+			</OnShow>
+			<OnHide>
+				PlaySound("igCharacterInfoClose")
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>
