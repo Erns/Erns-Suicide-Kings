@@ -1,0 +1,642 @@
+<!--
+Ern's Suicide Kings
+<Ern_SKTab_Loot.xml>
+Original Creation Date:	7/18/2012
+Updated Date:			2/16/2014
+Contact:  Ern.Warcraft@gmail.com
+
+Refer to LICENSE.txt for the Apache License, Version 2.0.
+
+Copyright 2012-2014 Aaron Sayles.  All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Ern_SKTab_Loot.lua" />
+	<FontString name="fntLootTab_Bidders_Template" inherits="GameFontNormal" virtual="true" font="Fonts\ARIALN.TTF" text="" justifyV="TOP" justifyH="LEFT">
+		<Size>
+			<AbsDimension x="110" y="300" />
+		</Size>
+		<FontHeight>
+			<AbsValue val="10" />
+		</FontHeight>
+	</FontString>
+	<Button name="scrLootTab_Dropped_Template" virtual="true" parent="scrLootTab_DroppedChild">
+		<Size>
+			<AbsDimension x="150" y="16" />
+		</Size>
+		<Scripts>
+			<OnClick>
+				lootSelect(self)
+			</OnClick>
+			<OnEnter>
+				EnterLootHighlight(self)
+			</OnEnter>
+			<OnLeave>
+				LeaveLootHighlight(self)
+			</OnLeave>
+		</Scripts>
+		<HighlightTexture inherits="UIPanelButtonHighlightTexture" file="Interface\BUTTONS\UI-Panel-Button-YellowHighlight" alphaMode="ADD">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</HighlightTexture>
+		<NormalFont style="GameFontNormalLeft" />
+	</Button>
+	<Frame name="frmLoot_SKTab" hidden="true" toplevel="true" movable="true" frameStrata="DIALOG" enableMouse="true">
+		<Size>
+			<AbsDimension x="375" y="507" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="frmMainESK" />
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="txtLootTab_Art" file="Interface\MERCHANTFRAME\UI-BuyBack-Icon">
+					<Size>
+						<AbsDimension x="60" y="60" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="frmLoot_SKTab">
+							<Offset x="5" y="-2" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer>
+				<Texture name="txtLootTab_TopRight" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-AUCTION-TOPRIGHT">
+					<Size>
+						<AbsDimension x="182" y="248" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="frmLoot_SKTab" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtLootTab_TopLeft" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-BID-TOPLEFT">
+					<Size>
+						<AbsDimension x="222" y="248" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="frmLoot_SKTab" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtLootTab_BottomLeft" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-BID-BOTLEFT">
+					<Size>
+						<AbsDimension x="222" y="266" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="frmLoot_SKTab" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtLootTab_BottomRight" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-AUCTION-BOTRIGHT">
+					<Size>
+						<AbsDimension x="182" y="266" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="frmLoot_SKTab" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtLootTab_Close" file="Interface\AUCTIONFRAME\AuctionHouseDressUpFrame-Corner">
+					<Size>
+						<AbsDimension x="28" y="28" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="frmLoot_SKTab" relativePoint="TOPRIGHT">
+							<Offset x="-2" y="-13" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="txtLootTab_BottomCover" file="Interface\AUCTIONFRAME\UI-AuctionFrame-FilterBg">
+					<Size>
+						<AbsDimension x="680" y="45" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="14" y="-400" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntLootTab_Title" inherits="GameFontNormal" font="Fonts\MORPHEUS.TTF" text="Ern's Suicide Kings" outline="THICK">
+					<Size>
+						<AbsDimension x="299" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="59" y="-15" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="0" g="0.753" b="0" />
+				</FontString>
+				<Texture name="txtLootTab_HDivide1" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="240" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="17" y="-303" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtLootTab_VDivide1" file="Interface\DialogFrame\DialogFrame-Right">
+					<Size>
+						<AbsDimension x="16" y="350" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="193" y="-71" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtLootTab_HDivide2" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="220" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="204" y="-220" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtLootTab_HDivide3" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="240" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="17" y="-246" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntLootTab_BidHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Bidding" outline="NORMAL" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="155" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="205" y="-71" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<FontString name="fntLootTab_ManualHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Send Loot To" outline="NORMAL" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="156" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="20" y="-312" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<FontString name="fntLootTab_AnnounceHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Announce Loot" outline="NORMAL" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="174" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="20" y="-255" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<FontString name="fntLootTab_BiddersHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Bidders" outline="NORMAL" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="155" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="206" y="-228" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="btnLootTab_Main" text="">
+				<Size>
+					<AbsDimension x="75" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="txtLootTab_BottomLeft" relativePoint="BOTTOMLEFT">
+						<Offset x="7" y="80" />
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="fntLootTab_Main" inherits="GameFontNormal" text="Main">
+							<Size>
+								<AbsDimension x="69" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="btnLootTab_Main" relativePoint="LEFT">
+									<Offset x="3" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						btnMain_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-INACTIVETAB" />
+				<PushedTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-INACTIVETAB" />
+				<HighlightTexture file="Interface\PaperDollInfoFrame\UI-Character-Tab-RealHighlight" />
+			</Button>
+			<Button name="btnLootTab_Options" text="">
+				<Size>
+					<AbsDimension x="75" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="btnLootTab_Main" relativePoint="TOPRIGHT">
+						<Offset x="10" />
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="fntLootTab_Options" inherits="GameFontNormal" text="Options">
+							<Size>
+								<AbsDimension x="66" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="btnLootTab_Options" relativePoint="LEFT">
+									<Offset x="3" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						btnOptions_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-INACTIVETAB" />
+				<PushedTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-INACTIVETAB" />
+				<HighlightTexture file="Interface\PaperDollInfoFrame\UI-Character-Tab-RealHighlight" />
+			</Button>
+			<Button name="btnLootTab_Loot" text="">
+				<Size>
+					<AbsDimension x="75" y="45" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="btnLootTab_Options" relativePoint="TOPRIGHT">
+						<Offset x="10" />
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="fntLootTab_Loot" inherits="GameFontNormal" text="Loot">
+							<Size>
+								<AbsDimension x="69" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="btnLootTab_Loot" relativePoint="LEFT">
+									<Offset x="3" y="10" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						btnLoot_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-ACTIVETAB" />
+				<PushedTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-ACTIVETAB" />
+			</Button>
+			<Button name="btnLootTab_Close" text="">
+				<Size>
+					<AbsDimension x="27" y="26" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="txtLootTab_Close" relativePoint="TOPRIGHT">
+						<Offset x="6" y="3" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnClose_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+				<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>
+			<ScrollFrame name="scrLootTab_Dropped" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="150" y="125" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="22" y="-122" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrLootTab_DroppedChild">
+						<Size>
+							<AbsDimension x="150" y="125" />
+						</Size>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<MessageFrame name="msgLootTab_LootSelected" parent="" toplevel="true">
+				<FontString inherits="ErrorFont" justifyH="CENTER" />
+				<Size>
+					<AbsDimension x="175" y="45" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="frmLoot_SKTab" relativePoint="TOPLEFT">
+						<Offset x="19" y="-71" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="txtLootTab_LootSelectedBackground" file="Interface\AUCTIONFRAME\UI-AuctionFrame-ItemSlot">
+							<Size>
+								<AbsDimension x="245" y="60" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="msgLootTab_LootSelected" relativePoint="TOPLEFT">
+									<Offset x="-35" y="5" />
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<Texture name="txtLootTab_LootSelectArt">
+							<Size>
+								<AbsDimension x="33" y="33" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="msgLootTab_LootSelected" relativePoint="TOPLEFT">
+									<Offset x="7" y="-8" />
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<FontString name="fntLootTab_LootSelectName" inherits="GameFontNormal" text="&lt;Loot Selected&gt;">
+							<Size>
+								<AbsDimension x="120" y="35" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="msgLootTab_LootSelected" relativePoint="TOPLEFT">
+									<Offset x="48" y="-7" />
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="10" />
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnter>
+						EnterLootSelected(self)
+					</OnEnter>
+					<OnLeave>
+						LeaveLootHighlight(self)
+					</OnLeave>
+				</Scripts>
+			</MessageFrame>
+			<Button name="selLootTab_Lists" inherits="UIDropDownMenuTemplate" text="Button1">
+				<Size>
+					<AbsDimension x="63" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="205" y="-97" />
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="btnLootTab_OpenBid" inherits="UIPanelButtonTemplate" text="Open Bid">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="215" y="-132" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnLootTab_OpenBid_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnLootTab_CloseBid" inherits="UIPanelButtonTemplate" text="Close Bid">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="215" y="-158" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnLootTab_CloseBid_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnLootTab_FinalCall" inherits="UIPanelButtonTemplate" text="Final Call">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="291" y="-132" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnLootTab_FinalCall_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnLootTab_CancelBid" inherits="UIPanelButtonTemplate" text="Cancel Bid">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="291" y="-158" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnLootTab_CancelBid_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="selLootTab_Players" inherits="UIDropDownMenuTemplate" text="Button2">
+				<Size>
+					<AbsDimension x="75" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="29" y="-338" />
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="btnLootTab_ManualSend" inherits="UIPanelButtonTemplate" text="Send">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="74" y="-368" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnLootTab_ManualSend_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnLootTab_AnnounceAll" inherits="UIPanelButtonTemplate" text="All">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="113" y="-281" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnLootTab_AnnounceAll_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnLootTab_AbsentToggle" inherits="UIPanelButtonTemplate" text="Absent Mode: Off">
+				<Size>
+					<AbsDimension x="143" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="215" y="-193" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetMotionScriptsWhileDisabled(true)
+					</OnLoad>
+					<OnClick>
+						btnLootTab_AbsentToggle_OnClick()
+					</OnClick>
+					<OnEnter>
+						NeedPartyTooltip_OnEnter(self)
+					</OnEnter>
+					<OnLeave>
+						NeedPartyTooltip_OnLeave()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="btnLootTab_AnnounceSelected" inherits="UIPanelButtonTemplate" text="Selected">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="37" y="-281" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnLootTab_AnnounceSelected_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<ScrollFrame name="scrLootTab_Bidders" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="140" y="140" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="205" y="-254" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrLootTab_BiddersChild">
+						<Size>
+							<AbsDimension x="140" y="140" />
+						</Size>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				tinsert(UISpecialFrames, self:GetName())
+				self:RegisterForDrag("LeftButton")
+				createBiddersFontstring()
+
+				txtLootTab_VDivide1:SetDrawLayer("OVERLAY", 0)
+				txtLootTab_HDivide1:SetDrawLayer("OVERLAY", 1)
+				txtLootTab_HDivide2:SetDrawLayer("OVERLAY", 1)
+				txtLootTab_HDivide3:SetDrawLayer("OVERLAY", 1)
+				txtLootTab_BottomCover:SetDrawLayer("OVERLAY", 2)
+
+				txtLootTab_LootSelectedBackground:SetDrawLayer("OVERLAY", 0)
+				txtLootTab_LootSelectArt:SetDrawLayer("OVERLAY", 1)
+				fntLootTab_LootSelectName:SetDrawLayer("OVERLAY", 1)
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+				ESK_FramesMoved()
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing()
+			</OnDragStop>
+			<OnShow>
+				PlaySound("igCharacterInfoOpen")
+			</OnShow>
+			<OnHide>
+				PlaySound("igCharacterInfoClose")
+				cancelBidding()
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>
