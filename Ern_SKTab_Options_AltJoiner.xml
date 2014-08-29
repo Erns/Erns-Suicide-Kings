@@ -1,0 +1,353 @@
+<!--
+Ern's Suicide Kings
+<Ern_SKTab_Options_AltJoiner.xml>
+Original Creation Date:	7/18/2012
+Updated Date:			2/16/2014
+Contact:  Ern.Warcraft@gmail.com
+
+Refer to LICENSE.txt for the Apache License, Version 2.0.
+
+Copyright 2012-2014 Aaron Sayles.  All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Ern_SKTab_Options_AltJoiner.lua" />
+	<Button name="scrOptionsTab_AltJoiner_Player_Template" virtual="true" parent="scrOptionsTab_AltJoiner_PlayerChild">
+		<Size>
+			<AbsDimension x="140" y="16" />
+		</Size>
+		<Scripts>
+			<OnClick>
+				playerAltJoinSelect(self)
+			</OnClick>
+		</Scripts>
+		<HighlightTexture inherits="UIPanelButtonHighlightTexture" file="Interface\BUTTONS\UI-Panel-Button-YellowHighlight" alphaMode="ADD">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</HighlightTexture>
+		<NormalFont style="GameFontNormalLeftYellow" />
+	</Button>
+	<Button name="scrOptionsTab_AltJoiner_Alt_Template" virtual="true" parent="scrOptionsTab_AltJoiner_AltsChild">
+		<Size>
+			<AbsDimension x="140" y="16" />
+		</Size>
+		<Scripts>
+			<OnClick>
+				altAltJoinSelect(self)
+			</OnClick>
+		</Scripts>
+		<HighlightTexture inherits="UIPanelButtonHighlightTexture" file="Interface\BUTTONS\UI-Panel-Button-YellowHighlight" alphaMode="ADD">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</HighlightTexture>
+		<NormalFont style="GameFontNormalLeftYellow" />
+	</Button>
+	<Frame name="frmOptions_SKTab_AltJoiner" hidden="true" parent="" toplevel="true" movable="true" frameStrata="DIALOG" enableMouse="true">
+		<Size>
+			<AbsDimension x="375" y="375" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="" relativePoint="CENTER" />
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="txtOptionsTab_AltJoiner_Art" file="Interface\FriendsFrame\FriendsFrameScrollIcon">
+					<Size>
+						<AbsDimension x="60" y="60" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="frmOptions_SKTab_AltJoiner">
+							<Offset x="5" y="-2" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer>
+				<Texture name="txtOptionsTab_AltJoiner_TopRight" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-AUCTION-TOPRIGHT">
+					<Size>
+						<AbsDimension x="182" y="248" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="frmOptions_SKTab_AltJoiner" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AltJoiner_TopLeft" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-BID-TOPLEFT">
+					<Size>
+						<AbsDimension x="222" y="248" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="frmOptions_SKTab_AltJoiner" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AltJoiner_BottomLeft" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-BID-BOTLEFT">
+					<Size>
+						<AbsDimension x="258" y="285" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="frmOptions_SKTab_AltJoiner" relativePoint="BOTTOMLEFT">
+							<Offset x="-2" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AltJoiner_Close" file="Interface\AUCTIONFRAME\AuctionHouseDressUpFrame-Corner">
+					<Size>
+						<AbsDimension x="28" y="28" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="frmOptions_SKTab_AltJoiner" relativePoint="TOPRIGHT">
+							<Offset x="-2" y="-13" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AltJoiner_BottomRight" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-BID-BOTRIGHT">
+					<Size>
+						<AbsDimension x="182" y="282" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="frmOptions_SKTab_AltJoiner" relativePoint="BOTTOMRIGHT">
+							<Offset y="3" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AltJoiner_HDivide3" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="233" y="25" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="193" y="-218" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="txtOptionsTab_AltJoiner_BottomCover" file="Interface\AUCTIONFRAME\UI-AuctionFrame-FilterBg">
+					<Size>
+						<AbsDimension x="566" y="50" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="15" y="-257" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntOptionsTab_AltJoiner_Title" inherits="GameFontNormal" font="Fonts\MORPHEUS.TTF" text="Alt Joiner" outline="THICK">
+					<Size>
+						<AbsDimension x="318" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="36" y="-15" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="0.753" g="0" b="0" />
+				</FontString>
+				<Texture name="txtOptionsTab_AltJoiner_VDivide1" file="Interface\DialogFrame\DialogFrame-Right">
+					<Size>
+						<AbsDimension x="16" y="216" />
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="frmOptions_SKTab_AltJoiner" relativePoint="CENTER">
+							<Offset x="3" y="7" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntOptionsTab_AltJoiner_AltHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Alts" outline="NORMAL">
+					<Size>
+						<AbsDimension x="174" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="193" y="-73" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<FontString name="fntOptionsTab_AltJoiner_PlayersHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Players" outline="NORMAL">
+					<Size>
+						<AbsDimension x="169" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="16" y="-73" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<Texture name="txtOptionsTab_AltJoiner_HDivide2" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="233" y="25" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="193" y="-90" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtOptionsTab_AltJoiner_HDivide1" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="227" y="25" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="16" y="-90" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="btnOptionsTab_AltJoiner_Close" text="">
+				<Size>
+					<AbsDimension x="27" y="26" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="txtOptionsTab_AltJoiner_Close" relativePoint="TOPRIGHT">
+						<Offset x="6" y="3" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnOptionsTab_AltJoiner_Close_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+				<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>
+			<ScrollFrame name="scrOptionsTab_AltJoiner_Alts" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="145" y="110" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="200" y="-102" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrOptionsTab_AltJoiner_AltsChild">
+						<Size>
+							<AbsDimension x="145" y="110" />
+						</Size>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<ScrollFrame name="scrOptionsTab_AltJoiner_Players" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="145" y="150" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="19" y="-102" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrOptionsTab_AltJoiner_PlayerChild">
+						<Size>
+							<AbsDimension x="145" y="150" />
+						</Size>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<Button name="btnOptionsTab_AltJoiner_AddAlt" inherits="UIPanelButtonTemplate" text="Add">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="204" y="-231" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnOptionsTab_AltJoiner_AddAlt_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnOptionsTab_AltJoiner_RemoveAlt" inherits="UIPanelButtonTemplate" text="Remove">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="280" y="-231" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnOptionsTab_AltJoiner_RemoveAlt_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnOptionsTab_AltJoiner_Close2" inherits="UIPanelButtonTemplate" text="Close">
+				<Size>
+					<AbsDimension x="55" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="315" y="-262" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnOptionsTab_AltJoiner_Close2_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				tinsert(UISpecialFrames, self:GetName())
+				self:RegisterForDrag("LeftButton")
+
+				txtOptionsTab_AltJoiner_VDivide1:SetDrawLayer("OVERLAY", 1)
+				txtOptionsTab_AltJoiner_HDivide1:SetDrawLayer("OVERLAY", 2)
+				txtOptionsTab_AltJoiner_HDivide2:SetDrawLayer("OVERLAY", 2)
+				txtOptionsTab_AltJoiner_HDivide3:SetDrawLayer("OVERLAY", 2)
+
+				txtOptionsTab_AltJoiner_BottomCover:SetDrawLayer("OVERLAY", 2)
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing()
+			</OnDragStop>
+			<OnShow>
+				PlaySound("igCharacterInfoOpen")
+				altJoinLoad()
+			</OnShow>
+			<OnHide>
+				PlaySound("igCharacterInfoClose")
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>
