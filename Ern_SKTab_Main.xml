@@ -1,0 +1,590 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Ern_SKTab_Main.lua" />
+	<Button name="scrMainTab_List_Template" virtual="true" parent="scrMainTab_ListsChild">
+		<Size>
+			<AbsDimension x="140" y="16" />
+		</Size>
+		<Scripts>
+			<OnClick>
+				listSelect(self)
+			</OnClick>
+		</Scripts>
+		<HighlightTexture inherits="UIPanelButtonHighlightTexture" file="Interface\BUTTONS\UI-Panel-Button-YellowHighlight" alphaMode="ADD">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</HighlightTexture>
+		<NormalFont style="GameFontNormalLeft" />
+	</Button>
+	<Button name="scrMainTab_Player_Template" virtual="true" parent="scrMainTab_PlayersChild">
+		<Size>
+			<AbsDimension x="140" y="16" />
+		</Size>
+		<Scripts>
+			<OnClick>
+				playerSelect(self)
+			</OnClick>
+			<OnEnter>
+				PlayerAltTooltip_OnEnter(self)
+			</OnEnter>
+			<OnLeave>
+				PlayerAltTooltip_OnLeave()
+			</OnLeave>
+		</Scripts>
+		<HighlightTexture inherits="UIPanelButtonHighlightTexture" file="Interface\BUTTONS\UI-Panel-Button-YellowHighlight" alphaMode="ADD">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</HighlightTexture>
+		<NormalFont style="GameFontNormalLeftYellow" />
+	</Button>
+	<Frame name="frmMain_SKTab" hidden="true" toplevel="true" movable="true" frameStrata="DIALOG" enableMouse="true">
+		<Size>
+			<AbsDimension x="375" y="507" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="frmMainESK" />
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="txtMainTab_Art" file="Interface\Reforging\Reforge-Portrait">
+					<Size>
+						<AbsDimension x="60" y="60" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="frmMain_SKTab">
+							<Offset x="5" y="-2" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer>
+				<Texture name="txtMainTab_TopRight" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-AUCTION-TOPRIGHT">
+					<Size>
+						<AbsDimension x="182" y="248" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="frmMain_SKTab" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtMainTab_BottomRight" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-AUCTION-BOTRIGHT">
+					<Size>
+						<AbsDimension x="182" y="266" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="frmMain_SKTab" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtMainTab_Close" file="Interface\AUCTIONFRAME\AuctionHouseDressUpFrame-Corner">
+					<Size>
+						<AbsDimension x="28" y="28" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="frmMain_SKTab" relativePoint="TOPRIGHT">
+							<Offset x="-2" y="-13" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtMainTab_TopLeft" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-AUCTION-TOPLEFT">
+					<Size>
+						<AbsDimension x="222" y="248" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="frmMain_SKTab" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtMainTab_BottomLeft" file="Interface\AUCTIONFRAME\UI-AUCTIONFRAME-AUCTION-BOTLEFT">
+					<Size>
+						<AbsDimension x="222" y="266" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="frmMain_SKTab" />
+					</Anchors>
+				</Texture>
+				<Texture name="txtMainTab_BottomLeftBackground" file="Interface\FrameGeneral\UI-Background-Marble">
+					<Size>
+						<AbsDimension x="172" y="215" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="14" y="-205" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtMainTab_HDivide2" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="240" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="187" y="-310" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="txtMainTab_BottomCover" file="Interface\AUCTIONFRAME\UI-AuctionFrame-FilterBg">
+					<Size>
+						<AbsDimension x="680" y="45" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="14" y="-400" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntMainTab_Title" inherits="GameFontNormal" font="Fonts\MORPHEUS.TTF" text="Ern's Suicide Kings" outline="THICK">
+					<Size>
+						<AbsDimension x="299" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="59" y="-15" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="18" />
+					</FontHeight>
+					<Color r="0" g="0.753" b="0" />
+				</FontString>
+				<FontString name="fntMainTab_PlayersHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Player Functions" outline="NORMAL" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="157" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="189" y="-322" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<Texture name="txtMainTab_HDivide1" file="Interface\DialogFrame\UI-DialogBox-Divider">
+					<Size>
+						<AbsDimension x="220" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="15" y="-336" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntMainTab_ListsHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="List Functions" outline="NORMAL" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="161" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="23" y="-205" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<Texture name="txtMainTab_VDivide2" file="Interface\DialogFrame\DialogFrame-Right">
+					<Size>
+						<AbsDimension x="16" y="350" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="176" y="-70" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="txtMainTab_VDivide1" file="Interface\DialogFrame\DialogFrame-Left">
+					<Size>
+						<AbsDimension x="16" y="346" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="9" y="-70" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntMainTab_AbsentHeader" inherits="GameFontNormal" font="Fonts\ARIALN.TTF" text="Absent Mode" outline="NORMAL" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="146" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="23" y="-348" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+				</FontString>
+				<Texture name="txtMainTab_ListsTopHeader" file="Interface\HELPFRAME\HelpFrameTab-Active">
+					<Size>
+						<AbsDimension x="100" y="30" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="58" y="-42" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntMainTab_ListsTopHeader" inherits="GameFontNormal" font="Fonts\MORPHEUS.TTF" text="Lists" outline="NORMAL">
+					<Size>
+						<AbsDimension x="80" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="66" y="-50" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+				</FontString>
+				<Texture name="txtMainTab_PlayersTopHeader" file="Interface\HELPFRAME\HelpFrameTab-Active">
+					<Size>
+						<AbsDimension x="100" y="30" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="228" y="-42" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="fntMainTab_PlayersTopHeader" inherits="GameFontNormal" font="Fonts\MORPHEUS.TTF" text="Players" outline="NORMAL">
+					<Size>
+						<AbsDimension x="80" y="20" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="238" y="-50" />
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="15" />
+					</FontHeight>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="btnMainTab_Main" text="">
+				<Size>
+					<AbsDimension x="75" y="45" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="txtMainTab_BottomLeft" relativePoint="BOTTOMLEFT">
+						<Offset x="7" y="80" />
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="fntMainTab_Main" inherits="GameFontNormal" text="Main">
+							<Size>
+								<AbsDimension x="69" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="btnMainTab_Main" relativePoint="LEFT">
+									<Offset x="3" y="10" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						btnMain_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-ACTIVETAB" />
+				<PushedTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-ACTIVETAB" />
+			</Button>
+			<Button name="btnMainTab_Options" text="">
+				<Size>
+					<AbsDimension x="75" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="btnMainTab_Main" relativePoint="TOPRIGHT">
+						<Offset x="10" />
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="fntMainTab_Options" inherits="GameFontNormal" text="Options">
+							<Size>
+								<AbsDimension x="66" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="btnMainTab_Options" relativePoint="LEFT">
+									<Offset x="3" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						btnOptions_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-INACTIVETAB" />
+				<PushedTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-INACTIVETAB" />
+				<HighlightTexture file="Interface\PaperDollInfoFrame\UI-Character-Tab-RealHighlight" />
+			</Button>
+			<Button name="btnMainTab_Loot" text="">
+				<Size>
+					<AbsDimension x="75" y="23" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="btnMainTab_Options" relativePoint="TOPRIGHT">
+						<Offset x="10" />
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="fntMainTab_Loot" inherits="GameFontNormal" text="Loot">
+							<Size>
+								<AbsDimension x="69" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="btnMainTab_Loot" relativePoint="LEFT">
+									<Offset x="3" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						btnLoot_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-INACTIVETAB" />
+				<PushedTexture file="Interface\PaperDollInfoFrame\UI-CHARACTER-INACTIVETAB" />
+				<HighlightTexture file="Interface\PaperDollInfoFrame\UI-Character-Tab-RealHighlight" />
+			</Button>
+			<Button name="btnMainTab_Close" text="">
+				<Size>
+					<AbsDimension x="27" y="26" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="txtMainTab_Close" relativePoint="TOPRIGHT">
+						<Offset x="6" y="3" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnClose_OnClick()
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up" />
+				<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down" />
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>
+			<ScrollFrame name="scrMainTab_Players" inherits="UIPanelScrollFrameTemplate" parent="frmMain_SKTab">
+				<Size>
+					<AbsDimension x="150" y="235" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="frmMain_SKTab" relativePoint="TOPLEFT">
+						<Offset x="193" y="-73" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrMainTab_PlayersChild">
+						<Size>
+							<AbsDimension x="150" y="235" />
+						</Size>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<ScrollFrame name="scrMainTab_Lists" inherits="UIPanelScrollFrameTemplate" parent="frmMain_SKTab">
+				<Size>
+					<AbsDimension x="145" y="125" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="frmMain_SKTab" relativePoint="TOPLEFT">
+						<Offset x="14" y="-73" />
+					</Anchor>
+				</Anchors>
+				<Backdrop bgFile="" edgeFile="">
+					<BackgroundInsets>
+						<AbsInset xsi:nil="true" />
+					</BackgroundInsets>
+				</Backdrop>
+				<ScrollChild>
+					<Frame name="scrMainTab_ListsChild">
+						<Size x="145" y="125" />
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<Button name="btnMainTab_PlayerMoveUp" inherits="UIPanelButtonTemplate" text="Up">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="204" y="-348" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnMainTab_PlayerMoveUp_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnMainTab_PlayerMoveDown" inherits="UIPanelButtonTemplate" text="Down">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="204" y="-374" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnMainTab_PlayerMoveDown_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnMainTab_PlayerMoveTop" inherits="UIPanelButtonTemplate" text="King">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="280" y="-348" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnMainTab_PlayerMoveTop_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnMainTab_PlayerMoveBottom" inherits="UIPanelButtonTemplate" text="Suicide">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="280" y="-374" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnMainTab_PlayerMoveBottom_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnMainTab_ListSync" inherits="UIPanelButtonTemplate" text="Sync">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="26" y="-231" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetMotionScriptsWhileDisabled(true)
+					</OnLoad>
+					<OnClick>
+						btnMainTab_ListSync_OnClick()
+					</OnClick>
+					<OnEnter>
+						btnMainTab_ListSync_OnEnter(self)
+					</OnEnter>
+					<OnLeave>
+						btnMainTab_ListSync_OnLeave()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="btnMainTab_ListRandom" inherits="UIPanelButtonTemplate" text="Randomize">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="102" y="-231" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnMainTab_ListRandom_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="btnMainTab_AbsentMode" inherits="UIPanelButtonTemplate" text="Off">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="66" y="-374" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetMotionScriptsWhileDisabled(true)
+					</OnLoad>
+					<OnClick>
+						btnMainTab_AbsentMode_OnClick()
+					</OnClick>
+					<OnEnter>
+						NeedPartyTooltip_OnEnter(self)
+					</OnEnter>
+					<OnLeave>
+						NeedPartyTooltip_OnLeave()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="btnMainTab_ListAnnounce" inherits="UIPanelButtonTemplate" text="Announce">
+				<Size>
+					<AbsDimension x="70" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="26" y="-257" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnMainTab_ListAnnounce_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				tinsert(UISpecialFrames, self:GetName())
+				self:RegisterForDrag("LeftButton")
+
+				txtMainTab_VDivide1:SetDrawLayer("OVERLAY", 2)
+				txtMainTab_VDivide2:SetDrawLayer("OVERLAY", 0)
+				txtMainTab_BottomCover:SetDrawLayer("OVERLAY", 3)
+				txtMainTab_HDivide1:SetDrawLayer("OVERLAY", 1)
+				txtMainTab_HDivide2:SetDrawLayer("OVERLAY", 1)
+
+				txtMainTab_BottomLeft:SetDrawLayer("ARTWORK", 0)
+				txtMainTab_BottomLeftBackground:SetDrawLayer("ARTWORK", 1)
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+				ESK_FramesMoved()
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing()
+			</OnDragStop>
+			<OnShow>
+				PlaySound("igCharacterInfoOpen")
+			</OnShow>
+			<OnHide>
+				PlaySound("igCharacterInfoClose")
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>
