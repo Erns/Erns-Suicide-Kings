@@ -1,0 +1,93 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Ern_SK_Main.lua" />
+	<Button name="ErnSK_MinimapButton" parent="Minimap" movable="true" enableMouse="true">
+		<Size>
+			<AbsDimension x="33" y="33" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT" />
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture name="ErnSK_MinimapButton_Overlay" file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Size>
+						<AbsDimension x="56" y="56" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+				</Texture>
+				<Texture name="ErnSK_MinimapButton_Icon" file="Interface\ICONS\INV_Helmet_01">
+					<Size>
+						<AbsDimension x="21" y="21" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-6" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="ErnSK_MinimapButton_DraggingFrame" hidden="true">
+				<Scripts>
+					<OnUpdate>
+						ErnSK_MinimapButton_DraggingFrame_OnUpdate()
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("LeftButtonUp","RightButtonUp")
+				self:RegisterForDrag("LeftButton","RightButton")
+				ErnSK_MinimapButton_Icon:SetDrawLayer("OVERLAY", 0)
+				ErnSK_MinimapButton_Overlay:SetDrawLayer("OVERLAY", 1)
+			</OnLoad>
+			<OnDragStart>
+				self:LockHighlight()
+				ErnSK_MinimapButton_DraggingFrame:Show()
+			</OnDragStart>
+			<OnDragStop>
+				self:UnlockHighlight()
+				ErnSK_MinimapButton_DraggingFrame:Hide()
+			</OnDragStop>
+			<OnClick>
+				ErnSK_MinimapButton_OnClick()
+			</OnClick>
+			<OnEnter>
+				ErnSK_MinimapButton_OnEnter(self)
+			</OnEnter>
+			<OnLeave>
+				ErnSK_MinimapButton_OnLeave()
+			</OnLeave>
+		</Scripts>
+		<HighlightTexture file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight" alphaMode="ADD" />
+	</Button>
+	<Frame name="frmMainESK" movable="true" frameStrata="DIALOG" enableMouse="true">
+		<Size>
+			<AbsDimension x="375" y="507" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Backdrop bgFile="" edgeFile="">
+			<BackgroundInsets>
+				<AbsInset xsi:nil="true" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+		</Backdrop>
+		<Scripts>
+			<OnLoad>
+				tinsert(UISpecialFrames, self:GetName())
+				self:Hide()
+				Intro(self)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>
